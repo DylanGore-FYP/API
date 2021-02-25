@@ -1,47 +1,57 @@
-var express = require('express');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import logger from 'morgan';
 
-var indexRouter = require('./routes/index');
+import indexRouter from './routes/index';
 
-const swaggerJSDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
+import e from 'express';
 
 const swaggerDefinition = {
-    openapi: '3.0.3',
-    info: {
-        title: 'FYP API',
-        version: '0.0.0',
-        description: '',
-        contact: {
-            name: 'Github',
-            url: 'https://github.com/DylanGore/FYP-API',
-        },
+  openapi: '3.0.3',
+  info: {
+    title: 'FYP API',
+    version: '0.0.0',
+    description: '',
+    contact: {
+      name: 'Github',
+      url: 'https://github.com/DylanGore/FYP-API',
     },
-    servers: [
-        {
-            url: 'http://localhost:3000',
-            description: 'Development server',
-        },
-    ],
+  },
+  servers: [
+    {
+      url: 'http://localhost:5000',
+      description: 'Development server',
+    },
+  ],
 };
 
 const options = {
-    swaggerDefinition,
-    // Paths to files containing OpenAPI definitions
-    apis: ['./routes/*.js'],
+  swaggerDefinition,
+  // Paths to files containing OpenAPI definitions
+  apis: ['./routes/*.js', './docs/*.yml'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
 
-var app = express();
+// Setup Express
+const app = express();
+
+const port = process.env.PORT || 5000;
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cors());
 
+// Routing
 app.use('/', indexRouter);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-module.exports = app;
+// Run Server
+app.listen(port, function () {
+  console.log('Express: FYP API server listening on port ' + port);
+});

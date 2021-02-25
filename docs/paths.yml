@@ -1,0 +1,86 @@
+paths:
+  /:
+    get:
+      summary: The initial API endpoint
+      description: Returns the current API version
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    type: string
+                    example: 1.0
+
+  /vehicles/all:
+    get:
+      summary: Get a list of all known vehicles
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  vehicles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          description: The vehicle ID.
+                          example: 1
+                        registration:
+                          type: string
+                          description: The vehicle registration.
+                          example: 202-WX-1000
+                        manufacturer:
+                          type: string
+                          description: The vehicle manufacturer.
+                          example: Toyota
+                        model:
+                          type: string
+                          description: The vehicle model.
+                          example: Corolla
+  /vehicles/{vehicleId}/{metric}:
+    get:
+      summary: Get a list of all values for a specific vehicle and metric
+      parameters:
+        - in: path
+          name: vehicleId
+          schema:
+            type: string
+          required: true
+          description: The ID of the vehicle to get data for
+        - in: path
+          name: metric
+          schema:
+            type: string
+          required: true
+          description: The name of the metric
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    time:
+                      type: string
+                      description: The data timestamp
+                      example: '2020-12-08T13:35:44.810275457Z'
+                    field:
+                      type: string
+                      description: The data field to measure
+                      example: speed
+                    value:
+                      type: number
+                      format: float
+                      minimum: 0
+                      description: The value of the field
+                      example: 80

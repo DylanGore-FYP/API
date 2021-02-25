@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  fyp-api:
+    image: fyp_api
+    container_name: fyp_api
+    build:
+      context: .
+    restart: unless-stopped
+    network_mode: bridge
+    ports:
+      - 5000:5000
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
