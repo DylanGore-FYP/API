@@ -15,7 +15,7 @@ const fluxQueryMetric = `from(bucket: "${process.env.INFLUX_BUCKET}")
 |> range(start: 0)
 |> filter(fn: (r) => r["_measurement"] == "mqtt_consumer")
 |> filter(fn: (r) => r["_field"] == "METRIC_NAME")
-|> filter(fn: (r) => r["topic"] == "vehicles/VEHICLE_ID/METRIC_NAME")
+|> filter(fn: (r) => r["topic"] == "vehicles/VEHICLE_ID/data")
 |> yield(name: "mean")`;
 
 const fluxListTopics = `
