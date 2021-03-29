@@ -1,13 +1,17 @@
 import express, { response } from 'express';
 import { InfluxDB } from '@influxdata/influxdb-client';
 
-var router = express.Router();
-const queryApi = new InfluxDB({
-  url: 'http://10.0.0.4:8086',
-  token: '0BMOKQa0xSA7t4QFBQuZgqCXhksbL2lPAbBeQ_EB004BQlj0VZf988WLt6-nh-G-ZFDQKeLNiX0oVMGgmphQfg==',
-}).getQueryApi('Home');
+import dotenv from 'dotenv';
+dotenv.config();
 
-const fluxQueryMetric = `from(bucket: "vehicles")
+var router = express.Router();
+
+const queryApi = new InfluxDB({
+  url: `http://${process.env.INFLUX_HOST}:${process.env.INFLUX_PORT}`,
+  token: process.env.INFLUX_TOKEN,
+}).getQueryApi(process.env.INFLUX_ORG);
+
+const fluxQueryMetric = `from(bucket: "${process.env.INFLUX_BUCKET}")
 |> range(start: 0)
 |> filter(fn: (r) => r["_measurement"] == "mqtt_consumer")
 |> filter(fn: (r) => r["_field"] == "METRIC_NAME")
@@ -17,7 +21,7 @@ const fluxQueryMetric = `from(bucket: "vehicles")
 const fluxListTopics = `
 import "influxdata/influxdb/v1"
 v1.tagValues(
-    bucket: "vehicles",
+    bucket: "${process.env.INFLUX_BUCKET}",
     tag: "topic",
     predicate: (r) => true,
     start: -30d
