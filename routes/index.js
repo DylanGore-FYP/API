@@ -4,6 +4,8 @@ import { InfluxDB } from '@influxdata/influxdb-client';
 import dotenv from 'dotenv';
 dotenv.config();
 
+import authMiddleware from '../middlewares/auth';
+
 var router = express.Router();
 
 const queryApi = new InfluxDB({
@@ -31,7 +33,7 @@ router.get('/', function (req, res, next) {
   res.json({ version: '0.0.0' });
 });
 
-router.get('/vehicles/all', function (req, res, next) {
+router.get('/vehicles/all', authMiddleware, function (req, res, next) {
   var result = [];
   queryApi.queryRows(fluxListTopics, {
     next(row, tableMeta) {
@@ -51,7 +53,7 @@ router.get('/vehicles/all', function (req, res, next) {
   });
 });
 
-router.get('/vehicles/:vehicleId/:metric', function (req, res, next) {
+router.get('/vehicles/:vehicleId/:metric', authMiddleware, function (req, res, next) {
   var result = [];
   var query = fluxQueryMetric.replaceAll('VEHICLE_ID', req.params.vehicleId).replaceAll('METRIC_NAME', req.params.metric);
   console.log(query);
