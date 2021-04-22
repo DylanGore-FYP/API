@@ -7,7 +7,6 @@ import indexRouter from './routes/index';
 
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import e from 'express';
 
 const swaggerDefinition = {
   openapi: '3.0.3',

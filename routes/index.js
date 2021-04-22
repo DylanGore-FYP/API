@@ -4,7 +4,7 @@ import { InfluxDB } from '@influxdata/influxdb-client';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import authMiddleware from '../middlewares/auth';
+import { authMiddleware } from '../middlewares/auth';
 
 var router = express.Router();
 

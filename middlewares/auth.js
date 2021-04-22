@@ -12,7 +12,7 @@ export const authMiddleware = (request, response, next) => {
     if (authHeader && authHeader.split(' ')[0] !== 'Bearer') {
       response.send({ message: 'You are not authorized to access this resource', reason: 'Invalid token' }).status(401);
     } else {
-      const authToken = headerToken.split(' ')[1];
+      const authToken = authHeader.split(' ')[1];
       // Verify the token using Firebase, if it's valid, continue, else return a 403 error
       // prettier-ignore
       firebase.auth().verifyIdToken(authToken).then(() => next()).catch(() => {
