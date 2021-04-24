@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   fyp-api:
-    image: fyp_api
+    image: ghcr.io/dylangore-fyp/api:latest
     container_name: fyp_api
     build:
       context: .
