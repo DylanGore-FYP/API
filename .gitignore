@@ -60,4 +60,8 @@ typings/
 # next.js build output
 .next
 
+# Ignore Firebase credentials file
 serviceAccountKey.json
+
+# Ignore local docker-compose file 
+*.local.yml

@@ -1,5 +1,6 @@
 ## build stage ##
 FROM node:15-alpine as build-stage
+LABEL maintainer="Dylan Gore <hello@dylangore.ie>"
 
 # Define a working directory
 WORKDIR /fyp-api

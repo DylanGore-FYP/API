@@ -8,6 +8,8 @@
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DylanGore-FYP/api/build?style=for-the-badge)](https://github.com/DylanGore-FYP/api/actions/workflows/build-docker.yml)
+
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
