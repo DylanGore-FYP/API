@@ -1,4 +1,4 @@
-import express, { response } from 'express';
+import express from 'express';
 import { InfluxDB } from '@influxdata/influxdb-client';
 
 import dotenv from 'dotenv';

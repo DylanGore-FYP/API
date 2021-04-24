@@ -4,6 +4,7 @@ import cors from 'cors';
 import logger from 'morgan';
 
 import indexRouter from './routes/index';
+import authRouter from './routes/auth';
 
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
@@ -56,6 +57,7 @@ app.use(cors());
 
 // Routing
 app.use('/', indexRouter);
+app.use('/auth', authRouter);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Run Server
