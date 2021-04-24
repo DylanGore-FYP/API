@@ -1,7 +1,7 @@
 import express from 'express';
 import firebase from '../services/firebase';
 
-import { authMiddleware, authAdminMiddleware } from '../middlewares/auth';
+import { authAdminMiddleware } from '../middlewares/auth';
 
 var router = express.Router();
 

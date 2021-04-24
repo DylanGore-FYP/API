@@ -1,4 +1,3 @@
-import e from 'express';
 import firebase from '../services/firebase';
 
 // Middleware to handle authentication with a Firebase user token
