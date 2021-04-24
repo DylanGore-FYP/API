@@ -25,6 +25,14 @@ const swaggerDefinition = {
       description: 'Development server',
     },
   ],
+  components: {
+    securitySchemes: {
+      bearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+      },
+    },
+  },
 };
 
 const options = {

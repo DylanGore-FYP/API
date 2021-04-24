@@ -6,17 +6,17 @@ export const authMiddleware = (request, response, next) => {
   const authHeader = request.headers.authorization;
   // Ensure the token is present
   if (!authHeader) {
-    return response.send({ message: 'You are not authorized to access this resource', reason: 'No token provided' }).status(401);
+    return response.status(401).send({ message: 'You are not authorized to access this resource', reason: 'No token provided' });
   } else {
     // Ensure the header is valid (It should look something like 'Authorization xxxxxxx')
     if (authHeader && authHeader.split(' ')[0] !== 'Bearer') {
-      response.send({ message: 'You are not authorized to access this resource', reason: 'Invalid token' }).status(401);
+      response.status(401).send({ message: 'You are not authorized to access this resource', reason: 'Invalid token' });
     } else {
       const authToken = authHeader.split(' ')[1];
       // Verify the token using Firebase, if it's valid, continue, else return a 403 error
       // prettier-ignore
       firebase.auth().verifyIdToken(authToken).then(() => next()).catch(() => {
-        response.send({ message: 'Forbidden' }).status(403)
+        response.status(403).send({ message: 'Forbidden' })
       });
     }
   }
