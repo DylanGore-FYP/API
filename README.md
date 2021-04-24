@@ -8,7 +8,7 @@
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DylanGore-FYP/api/build?style=for-the-badge)](https://github.com/DylanGore-FYP/api/actions/workflows/build-docker.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/DylanGore-FYP/API/Build%20&%20Push%20Docker%20Image?style=for-the-badge)](https://github.com/DylanGore-FYP/api/actions/workflows/build-docker.yml)
 
 ## Contributors
 
