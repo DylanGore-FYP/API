@@ -19,7 +19,7 @@ jobs:
         id: prepare
         run: |
           DOCKER_IMAGE=ghcr.io/dylangore-fyp/api
-          VERSION=
+          VERSION=""
 
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/}
