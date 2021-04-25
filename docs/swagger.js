@@ -95,6 +95,10 @@ export default {
         message: 'You are not authorized to access this resource',
         reason: 'Invalid token',
       },
+      InvalidRole: {
+        message: 'You are not authorized to access this resource',
+        reason: 'Invalid role',
+      },
     },
     // #/components/responses
     responses: {
@@ -110,12 +114,13 @@ export default {
             },
             examples: {
               NoToken: {
-                message: 'You are not authorized to access this resource',
-                reason: 'No token provided',
+                $ref: '#/components/examples/NoToken',
               },
               InvalidToken: {
-                message: 'You are not authorized to access this resource',
-                reason: 'Invalid token',
+                $ref: '#/components/examples/InvalidToken',
+              },
+              InvalidRole: {
+                $ref: '#/components/examples/InvalidRole',
               },
             },
           },
@@ -393,8 +398,68 @@ export default {
         },
       },
     },
+    '/auth/users/:uid/enable': {
+      put: {
+        tags: ['Authentication'],
+        summary: 'Enable a user by uid',
+        securtiy: [
+          {
+            bearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            $ref: '#/components/parameters/uid',
+          },
+        ],
+        responses: {
+          200: {
+            $ref: '#/components/responses/200',
+          },
+          401: {
+            $ref: '#/components/responses/401',
+          },
+          403: {
+            $ref: '#/components/responses/403',
+          },
+          500: {
+            $ref: '#/components/responses/500',
+          },
+        },
+      },
+    },
+    '/auth/users/:uid/disable': {
+      put: {
+        tags: ['Authentication'],
+        summary: 'Disable a user by uid',
+        securtiy: [
+          {
+            bearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            $ref: '#/components/parameters/uid',
+          },
+        ],
+        responses: {
+          200: {
+            $ref: '#/components/responses/200',
+          },
+          401: {
+            $ref: '#/components/responses/401',
+          },
+          403: {
+            $ref: '#/components/responses/403',
+          },
+          500: {
+            $ref: '#/components/responses/500',
+          },
+        },
+      },
+    },
     '/auth/roles/grant/:role/:uid': {
-      post: {
+      put: {
         tags: ['Authentication'],
         summary: 'Give a user a new role',
         securtiy: [
@@ -427,7 +492,7 @@ export default {
       },
     },
     '/auth/roles/revoke/:role/:uid': {
-      post: {
+      put: {
         tags: ['Authentication'],
         summary: 'Remove a role from a user',
         securtiy: [
