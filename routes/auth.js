@@ -45,8 +45,8 @@ router.delete('/users/:uid', authAdminMiddleware, async function (req, res, _nex
   firebase.auth().deleteUser(req.params.uid).then(() => res.status(200)).catch(() => res.status(500))
 });
 
-/** POST: Grant a user a role by role name and uid */
-router.post('/roles/grant/:role/:uid', authAdminMiddleware, async function (req, res, _next) {
+/** PUT: Grant a user a role by role name and uid */
+router.put('/roles/grant/:role/:uid', authAdminMiddleware, async function (req, res, _next) {
   // prettier-ignore
   firebase.auth().setCustomUserClaims(req.params.uid, {role: req.params.role}).then(_user => {
     // Invalidate the user's current tokens as permissions may have changed
@@ -58,8 +58,8 @@ router.post('/roles/grant/:role/:uid', authAdminMiddleware, async function (req,
   });
 });
 
-/** POST: Remove a role from a user by role name and uid */
-router.post('/roles/revoke/:role/:uid', authAdminMiddleware, async function (req, res, _next) {
+/** PUT: Remove a role from a user by role name and uid */
+router.put('/roles/revoke/:role/:uid', authAdminMiddleware, async function (req, res, _next) {
   // prettier-ignore
   firebase.auth().setCustomUserClaims(req.params.uid, {role: 'user'}).then(_user => {
     // Invalidate the user's current tokens as permissions may have changed

@@ -459,7 +459,7 @@ export default {
       },
     },
     '/auth/roles/grant/:role/:uid': {
-      post: {
+      put: {
         tags: ['Authentication'],
         summary: 'Give a user a new role',
         securtiy: [
@@ -492,7 +492,7 @@ export default {
       },
     },
     '/auth/roles/revoke/:role/:uid': {
-      post: {
+      put: {
         tags: ['Authentication'],
         summary: 'Remove a role from a user',
         securtiy: [
