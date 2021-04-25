@@ -95,6 +95,10 @@ export default {
         message: 'You are not authorized to access this resource',
         reason: 'Invalid token',
       },
+      InvalidRole: {
+        message: 'You are not authorized to access this resource',
+        reason: 'Invalid role',
+      },
     },
     // #/components/responses
     responses: {
@@ -114,6 +118,9 @@ export default {
               },
               InvalidToken: {
                 $ref: '#/components/examples/InvalidToken',
+              },
+              InvalidRole: {
+                $ref: '#/components/examples/InvalidRole',
               },
             },
           },

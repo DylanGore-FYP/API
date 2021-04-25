@@ -15,7 +15,14 @@ export const authMiddleware = (request, response, next) => {
       const authToken = authHeader.split(' ')[1];
       // Verify the token using Firebase, if it's valid, continue, else return a 403 error
       // prettier-ignore
-      firebase.auth().verifyIdToken(authToken).then(() => next()).catch(() => {
+      firebase.auth().verifyIdToken(authToken).then(decodedToken => {
+        // Return 401 if the user does not have a defined role (i.e. has just created an account)
+        if (decodedToken.role !== 'user' && decodedToken.role !== 'admin'){
+          response.status(401).send({ message: 'You are not authorized to access this resource', reason: 'Invalid role' });
+        }else{
+          next();
+        }
+      }).catch(() => {
         response.status(403).send({ message: 'Forbidden' })
       });
     }
