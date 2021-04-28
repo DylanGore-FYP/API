@@ -29,6 +29,15 @@ v1.tagValues(
     start: -30d
 )`;
 
+const fluxVehicleDetails = `from(bucket: "vehicles")
+|> range(start: 0)
+|> filter(fn: (r) => r["_measurement"] == "mqtt_consumer")
+|> filter(fn: (r) => r["_field"] == "lat")
+|> filter(fn: (r) => r["topic"] == "vehicles/VEHICLE_ID/data")
+|> keep(columns: ["_time", "vehicle_name", "vehicle_manufacturer", "vehicle_model", "driver"])
+|> sort(columns: ["_time"], desc: true)
+|> limit(n: 1)`;
+
 router.get('/', function (req, res, next) {
   res.json({ version: '0.0.0' });
 });
@@ -53,7 +62,24 @@ router.get('/vehicles/all', authMiddleware, function (req, res, next) {
   });
 });
 
-router.get('/vehicles/:vehicleId/:metric', authMiddleware, function (req, res, next) {
+router.get('/vehicles/:id', function (req, res, next) {
+  console.log('test');
+  var query = fluxVehicleDetails.replaceAll('VEHICLE_ID', req.params.id);
+  var result = [];
+  queryApi.queryRows(query, {
+    next(row, tableMeta) {
+      result.push(tableMeta.toObject(row));
+    },
+    error(error) {
+      console.error(error);
+    },
+    complete() {
+      res.json(result[0]);
+    },
+  });
+});
+
+router.get('/vehicles/:vehicleId/:metric', function (req, res, next) {
   var result = [];
   var query = fluxQueryMetric.replaceAll('VEHICLE_ID', req.params.vehicleId).replaceAll('METRIC_NAME', req.params.metric);
   console.log(query);
