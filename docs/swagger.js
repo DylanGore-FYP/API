@@ -237,6 +237,67 @@ export default {
         },
       },
     },
+    '/vehicles/{vehicleId}/tracking': {
+      get: {
+        tags: ['Vehicles'],
+        summary: 'Get a list of location values for the specified vehicle',
+        parameters: [
+          {
+            in: 'path',
+            name: 'vehicleId',
+            schema: {
+              type: 'string',
+            },
+            required: true,
+            description: 'The ID of the vehicle to get data for',
+          },
+        ],
+        responses: {
+          200: {
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      time: {
+                        type: 'string',
+                        description: 'The data timestamp',
+                        example: '2020-12-08T13:35:44.810275457Z',
+                      },
+                      lat: {
+                        type: 'number',
+                        format: 'float',
+                        description: 'The latitude value',
+                        minimum: 0.0,
+                        example: 52.2461,
+                      },
+                      lon: {
+                        type: 'number',
+                        format: 'float',
+                        description: 'The longitude value',
+                        example: 7.1387,
+                        minimum: 0.0,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          401: {
+            $ref: '#/components/responses/401',
+          },
+          403: {
+            $ref: '#/components/responses/403',
+          },
+          500: {
+            $ref: '#/components/responses/500',
+          },
+        },
+      },
+    },
     '/vehicles/{vehicleId}/{metric}': {
       get: {
         tags: ['Vehicles'],

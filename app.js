@@ -3,7 +3,8 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import logger from 'morgan';
 
-import indexRouter from './routes/index';
+import defaultRouter from './routes/default';
+import vehiclesRouter from './routes/vehicles';
 import authRouter from './routes/auth';
 
 import swaggerJSDoc from 'swagger-jsdoc';
@@ -32,7 +33,8 @@ app.use(cookieParser());
 app.use(cors());
 
 // Routing
-app.use('/', indexRouter);
+app.use('/', defaultRouter);
+app.use('/vehicles', vehiclesRouter);
 app.use('/auth', authRouter);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
