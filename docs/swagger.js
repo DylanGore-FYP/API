@@ -186,6 +186,63 @@ export default {
           },
         },
       },
+      vehicleDetails: {
+        description: 'A single vehicle database entry',
+        content: {
+          'application/json': {
+            schema: {
+              type: 'object',
+              properties: {
+                time: {
+                  type: 'string',
+                  description: 'The timestamp of the data entry',
+                  example: '2021-04-28T12:04:00.000Z',
+                },
+                alt: {
+                  type: 'number',
+                  description: 'The current altitude',
+                  example: 10,
+                },
+                lat: {
+                  type: 'number',
+                  description: 'The current latitude',
+                  example: 52.25111,
+                },
+                lon: {
+                  type: 'number',
+                  description: 'The current longitude',
+                  example: -7.17509,
+                },
+                friendly_name: {
+                  type: 'string',
+                  description: 'The name of the vehicle',
+                  example: 'Demo Vehicle',
+                },
+                manufacturer: {
+                  type: 'string',
+                  description: 'The vehicle manufacturer',
+                  example: 'Tesla',
+                },
+                model: {
+                  type: 'string',
+                  description: 'The vehicle model',
+                  example: 'Model X',
+                },
+                topic: {
+                  type: 'string',
+                  description: 'The MQTT topic the data was read from',
+                  example: 'vehicles/demo/data',
+                },
+                speed: {
+                  type: 'number',
+                  description: 'Vehicle metric (this can vary)',
+                  example: 25,
+                },
+              },
+            },
+          },
+        },
+      },
     },
   },
   paths: {
@@ -234,6 +291,106 @@ export default {
           403: {
             $ref: '#/components/responses/403',
           },
+          500: {
+            $ref: '#/components/responses/500',
+          },
+        },
+      },
+    },
+    '/vehicles/:vehicleId': {
+      get: {
+        tags: ['Vehicles'],
+        summary: 'Return the most recent DB entry for a specific vehicle',
+        securtiy: [
+          {
+            bearerAuth: [],
+          },
+        ],
+        parameters: [
+          {
+            in: 'path',
+            name: 'vehicleId',
+            schema: {
+              type: 'string',
+            },
+            required: true,
+            description: 'The ID of the vehicle to get data for',
+          },
+        ],
+        responses: {
+          200: {
+            $ref: '#/components/responses/vehicleDetails',
+          },
+          401: {
+            $ref: '#/components/responses/401',
+          },
+          403: {
+            $ref: '#/components/responses/403',
+          },
+          500: {
+            $ref: '#/components/responses/500',
+          },
+        },
+      },
+    },
+    '/vehicles/{vehicleId}/tracking': {
+      get: {
+        tags: ['Vehicles'],
+        summary: 'Get a list of location values for the specified vehicle',
+        parameters: [
+          {
+            in: 'path',
+            name: 'vehicleId',
+            schema: {
+              type: 'string',
+            },
+            required: true,
+            description: 'The ID of the vehicle to get data for',
+          },
+        ],
+        responses: {
+          200: {
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      time: {
+                        type: 'string',
+                        description: 'The data timestamp',
+                        example: '2021-04-28T12:04:00.000Z',
+                      },
+                      lat: {
+                        type: 'number',
+                        format: 'float',
+                        description: 'The latitude value',
+                        minimum: 0.0,
+                        example: 52.2461,
+                      },
+                      lon: {
+                        type: 'number',
+                        format: 'float',
+                        description: 'The longitude value',
+                        example: 7.1387,
+                        minimum: 0.0,
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          401: {
+            $ref: '#/components/responses/401',
+          },
+          403: {
+            $ref: '#/components/responses/403',
+          },
+          500: {
+            $ref: '#/components/responses/500',
+          },
         },
       },
     },
@@ -273,12 +430,7 @@ export default {
                       time: {
                         type: 'string',
                         description: 'The data timestamp',
-                        example: '2020-12-08T13:35:44.810275457Z',
-                      },
-                      field: {
-                        type: 'string',
-                        description: 'The data field to measure',
-                        example: 'speed',
+                        example: '2021-04-28T12:04:00.000Z',
                       },
                       value: {
                         type: 'number',
@@ -298,6 +450,9 @@ export default {
           },
           403: {
             $ref: '#/components/responses/403',
+          },
+          500: {
+            $ref: '#/components/responses/500',
           },
         },
       },
