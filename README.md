@@ -9,7 +9,6 @@
 <!-- prettier-ignore-end -->
 
 [![GitHub Workflow Status - Lint](https://img.shields.io/github/workflow/status/DylanGore-FYP/API/Lint%20Code?label=Lint&logo=github&style=for-the-badge)](https://github.com/DylanGore-FYP/API/actions/workflows/lint-code.yml)
-
 [![GitHub Workflow Status - Build](https://img.shields.io/github/workflow/status/DylanGore-FYP/API/Build%20&%20Push%20Docker%20Image?label=Docker%20Build&logo=github&style=for-the-badge)](https://github.com/DylanGore-FYP/api/actions/workflows/build-docker.yml)
 
 ## Contributors

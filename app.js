@@ -44,7 +44,7 @@ app.listen(port, function () {
 });
 
 //Set admin user if configured
-if (process.env.ADMIN_UID && process.env.ADMIN_UID.length > 0) {
+if (process.env.ADMIN_UID && process.env.ADMIN_UID.length > 0 && process.env.NODE_ENV != 'test') {
   // prettier-ignore
   firebase.auth().setCustomUserClaims(process.env.ADMIN_UID, {role: 'admin'}).then(_user => {
     // Invalidate the user's current tokens as permissions may have changed
@@ -54,3 +54,5 @@ if (process.env.ADMIN_UID && process.env.ADMIN_UID.length > 0) {
     console.error(err)
   });
 }
+
+export default app;
