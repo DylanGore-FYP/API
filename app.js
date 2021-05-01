@@ -7,6 +7,8 @@ import defaultRouter from './routes/default';
 import vehiclesRouter from './routes/vehicles';
 import authRouter from './routes/auth';
 
+import promBundle from 'express-prom-bundle';
+
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDefinition from './docs/swagger';
@@ -31,6 +33,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
+
+// Prometheus Metrics
+if (process.env.ENABLE_METRICS && process.env.ENABLE_METRICS.toLowerCase() === 'true') {
+  app.use(promBundle({ includeMethod: true, includePath: true, includeStatusCode: true }));
+}
 
 // Routing
 app.use('/', defaultRouter);
