@@ -13,11 +13,11 @@ const database = new InfluxDB({
   host: process.env.INFLUX_HOST,
   database: process.env.INFLUX_DATABASE,
   username: process.env.INFLUX_USER,
-  password: process.env.INFLUX_PASSWORD,
+  password: process.env.INFLUX_PASSWORD
 });
 
 /** GET: Return a list of all vehicle IDs in the database */
-router.get('/all', authMiddleware, function (req, res, next) {
+router.get('/all', authMiddleware, function (_req, res, _next) {
   // prettier-ignore
   database.query(`SHOW TAG VALUES ON "${process.env.INFLUX_DATABASE}" WITH KEY = "topic"`).then(result =>{
     let finalResult = []
@@ -38,7 +38,7 @@ router.get('/all', authMiddleware, function (req, res, next) {
 });
 
 /** GET: Return the most recent DB entry for a specific vehicle */
-router.get('/:id', function (req, res, next) {
+router.get('/:id', function (req, res, _next) {
   // prettier-ignore
   database.query(`SELECT * FROM "mqtt_consumer" WHERE ("topic" = 'vehicles/${req.params.id}/data') ORDER BY DESC LIMIT 1`).then(result =>{
     res.status(200).json(result[0])
@@ -49,7 +49,7 @@ router.get('/:id', function (req, res, next) {
 });
 
 /** GET: Return the location history (latitude & longitude) for a specific vehicle */
-router.get('/:id/tracking', authMiddleware, function (req, res, next) {
+router.get('/:id/tracking', authMiddleware, function (req, res, _next) {
   // prettier-ignore
   database.query(`SELECT "lat","lon","alt" FROM "mqtt_consumer" WHERE "topic" = 'vehicles/${req.params.id}/data' ORDER BY DESC`).then(result =>{
     res.status(200).json(result)
@@ -60,7 +60,7 @@ router.get('/:id/tracking', authMiddleware, function (req, res, next) {
 });
 
 /** GET: Return a list of metric values for a specific vehicle and metric */
-router.get('/:id/:metric', authMiddleware, function (req, res, next) {
+router.get('/:id/:metric', authMiddleware, function (req, res, _next) {
   // prettier-ignore
   database.query(`SELECT "${req.params.metric}" FROM "mqtt_consumer" WHERE "topic" = 'vehicles/${req.params.id}/data'`).then(result =>{
     let finalResult = []

@@ -6,22 +6,22 @@ export default {
     description: '',
     contact: {
       name: 'Github',
-      url: 'https://github.com/DylanGore/FYP-API',
-    },
+      url: 'https://github.com/DylanGore/FYP-API'
+    }
   },
   servers: [
     {
       url: 'http://localhost:5000',
-      description: 'Development server',
-    },
+      description: 'Development server'
+    }
   ],
   components: {
     // #/components/securitySchemas
     securitySchemes: {
       bearerAuth: {
         type: 'http',
-        scheme: 'bearer',
-      },
+        scheme: 'bearer'
+      }
     },
     // #/components/parameters
     parameters: {
@@ -30,35 +30,35 @@ export default {
         name: 'role',
         description: 'The name of the role',
         schema: {
-          $ref: '#/components/schemas/role',
-        },
+          $ref: '#/components/schemas/role'
+        }
       },
       uid: {
         in: 'path',
         name: 'uid',
         description: 'The unique identifier for a user',
         schema: {
-          $ref: '#/components/schemas/uid',
-        },
-      },
+          $ref: '#/components/schemas/uid'
+        }
+      }
     },
     // #/components/schemas
     schemas: {
       200: {
-        description: 'OK',
+        description: 'OK'
       },
       401: {
         type: 'object',
         properties: {
           message: {
             type: 'string',
-            description: 'The error message',
+            description: 'The error message'
           },
           reason: {
             type: 'string',
-            description: 'The reason the error was returned',
-          },
-        },
+            description: 'The reason the error was returned'
+          }
+        }
       },
       403: {
         type: 'object',
@@ -66,65 +66,65 @@ export default {
           message: {
             type: 'string',
             description: 'The error message',
-            example: 'Forbidden',
-          },
-        },
+            example: 'Forbidden'
+          }
+        }
       },
       500: {
-        description: 'Internal server error',
+        description: 'Internal server error'
       },
       role: {
         type: 'string',
         required: true,
         description: 'The name of the role',
-        example: 'admin',
+        example: 'admin'
       },
       uid: {
         type: 'string',
         required: true,
-        description: 'The unique identifier for a user',
-      },
+        description: 'The unique identifier for a user'
+      }
     },
     // #/components/examples
     examples: {
       NoToken: {
         message: 'You are not authorized to access this resource',
-        reason: 'No token provided',
+        reason: 'No token provided'
       },
       InvalidToken: {
         message: 'You are not authorized to access this resource',
-        reason: 'Invalid token',
+        reason: 'Invalid token'
       },
       InvalidRole: {
         message: 'You are not authorized to access this resource',
-        reason: 'Invalid role',
-      },
+        reason: 'Invalid role'
+      }
     },
     // #/components/responses
     responses: {
       200: {
-        $ref: '#/components/schemas/200',
+        $ref: '#/components/schemas/200'
       },
       401: {
         description: 'Unauthorized',
         content: {
           'application/json': {
             schema: {
-              $ref: '#/components/schemas/401',
+              $ref: '#/components/schemas/401'
             },
             examples: {
               NoToken: {
-                $ref: '#/components/examples/NoToken',
+                $ref: '#/components/examples/NoToken'
               },
               InvalidToken: {
-                $ref: '#/components/examples/InvalidToken',
+                $ref: '#/components/examples/InvalidToken'
               },
               InvalidRole: {
-                $ref: '#/components/examples/InvalidRole',
-              },
-            },
-          },
-        },
+                $ref: '#/components/examples/InvalidRole'
+              }
+            }
+          }
+        }
       },
       403: {
         description: 'Forbidden',
@@ -136,15 +136,15 @@ export default {
                 message: {
                   type: 'string',
                   description: 'The error message',
-                  example: 'Forbidden',
-                },
-              },
-            },
-          },
-        },
+                  example: 'Forbidden'
+                }
+              }
+            }
+          }
+        }
       },
       500: {
-        $ref: '#/components/schemas/500',
+        $ref: '#/components/schemas/500'
       },
       vehicleList: {
         description: 'A list of vehicles',
@@ -161,30 +161,30 @@ export default {
                       id: {
                         type: 'integer',
                         description: 'The vehicle ID.',
-                        example: 1,
+                        example: 1
                       },
                       registration: {
                         type: 'string',
                         description: 'The vehicle registration.',
-                        example: '202-WX-1000',
+                        example: '202-WX-1000'
                       },
                       manufacturer: {
                         type: 'string',
                         description: 'The vehicle manufacturer.',
-                        example: 'Toyota',
+                        example: 'Toyota'
                       },
                       model: {
                         type: 'string',
                         description: 'The vehicle model.',
-                        example: 'Corolla',
-                      },
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
+                        example: 'Corolla'
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       },
       vehicleDetails: {
         description: 'A single vehicle database entry',
@@ -196,54 +196,54 @@ export default {
                 time: {
                   type: 'string',
                   description: 'The timestamp of the data entry',
-                  example: '2021-04-28T12:04:00.000Z',
+                  example: '2021-04-28T12:04:00.000Z'
                 },
                 alt: {
                   type: 'number',
                   description: 'The current altitude',
-                  example: 10,
+                  example: 10
                 },
                 lat: {
                   type: 'number',
                   description: 'The current latitude',
-                  example: 52.25111,
+                  example: 52.25111
                 },
                 lon: {
                   type: 'number',
                   description: 'The current longitude',
-                  example: -7.17509,
+                  example: -7.17509
                 },
                 friendly_name: {
                   type: 'string',
                   description: 'The name of the vehicle',
-                  example: 'Demo Vehicle',
+                  example: 'Demo Vehicle'
                 },
                 manufacturer: {
                   type: 'string',
                   description: 'The vehicle manufacturer',
-                  example: 'Tesla',
+                  example: 'Tesla'
                 },
                 model: {
                   type: 'string',
                   description: 'The vehicle model',
-                  example: 'Model X',
+                  example: 'Model X'
                 },
                 topic: {
                   type: 'string',
                   description: 'The MQTT topic the data was read from',
-                  example: 'vehicles/demo/data',
+                  example: 'vehicles/demo/data'
                 },
                 speed: {
                   type: 'number',
                   description: 'Vehicle metric (this can vary)',
-                  example: 25,
-                },
-              },
-            },
-          },
-        },
-      },
-    },
+                  example: 25
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   },
   paths: {
     // Default
@@ -261,15 +261,15 @@ export default {
                   properties: {
                     version: {
                       type: 'string',
-                      example: 1,
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
+                      example: 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     },
     // Vehicles
     '/vehicles/all': {
@@ -278,24 +278,24 @@ export default {
         summary: 'Get a list of all known vehicles',
         securtiy: [
           {
-            bearerAuth: [],
-          },
+            bearerAuth: []
+          }
         ],
         responses: {
           200: {
-            $ref: '#/components/responses/vehicleList',
+            $ref: '#/components/responses/vehicleList'
           },
           401: {
-            $ref: '#/components/responses/401',
+            $ref: '#/components/responses/401'
           },
           403: {
-            $ref: '#/components/responses/403',
+            $ref: '#/components/responses/403'
           },
           500: {
-            $ref: '#/components/responses/500',
-          },
-        },
-      },
+            $ref: '#/components/responses/500'
+          }
+        }
+      }
     },
     '/vehicles/:vehicleId': {
       get: {
@@ -303,35 +303,35 @@ export default {
         summary: 'Return the most recent DB entry for a specific vehicle',
         securtiy: [
           {
-            bearerAuth: [],
-          },
+            bearerAuth: []
+          }
         ],
         parameters: [
           {
             in: 'path',
             name: 'vehicleId',
             schema: {
-              type: 'string',
+              type: 'string'
             },
             required: true,
-            description: 'The ID of the vehicle to get data for',
-          },
+            description: 'The ID of the vehicle to get data for'
+          }
         ],
         responses: {
           200: {
-            $ref: '#/components/responses/vehicleDetails',
+            $ref: '#/components/responses/vehicleDetails'
           },
           401: {
-            $ref: '#/components/responses/401',
+            $ref: '#/components/responses/401'
           },
           403: {
-            $ref: '#/components/responses/403',
+            $ref: '#/components/responses/403'
           },
           500: {
-            $ref: '#/components/responses/500',
-          },
-        },
-      },
+            $ref: '#/components/responses/500'
+          }
+        }
+      }
     },
     '/vehicles/{vehicleId}/tracking': {
       get: {
@@ -342,11 +342,11 @@ export default {
             in: 'path',
             name: 'vehicleId',
             schema: {
-              type: 'string',
+              type: 'string'
             },
             required: true,
-            description: 'The ID of the vehicle to get data for',
-          },
+            description: 'The ID of the vehicle to get data for'
+          }
         ],
         responses: {
           200: {
@@ -360,39 +360,39 @@ export default {
                       time: {
                         type: 'string',
                         description: 'The data timestamp',
-                        example: '2021-04-28T12:04:00.000Z',
+                        example: '2021-04-28T12:04:00.000Z'
                       },
                       lat: {
                         type: 'number',
                         format: 'float',
                         description: 'The latitude value',
                         minimum: 0.0,
-                        example: 52.2461,
+                        example: 52.2461
                       },
                       lon: {
                         type: 'number',
                         format: 'float',
                         description: 'The longitude value',
                         example: 7.1387,
-                        minimum: 0.0,
-                      },
-                    },
-                  },
-                },
-              },
-            },
+                        minimum: 0.0
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           401: {
-            $ref: '#/components/responses/401',
+            $ref: '#/components/responses/401'
           },
           403: {
-            $ref: '#/components/responses/403',
+            $ref: '#/components/responses/403'
           },
           500: {
-            $ref: '#/components/responses/500',
-          },
-        },
-      },
+            $ref: '#/components/responses/500'
+          }
+        }
+      }
     },
     '/vehicles/{vehicleId}/{metric}': {
       get: {
@@ -403,20 +403,20 @@ export default {
             in: 'path',
             name: 'vehicleId',
             schema: {
-              type: 'string',
+              type: 'string'
             },
             required: true,
-            description: 'The ID of the vehicle to get data for',
+            description: 'The ID of the vehicle to get data for'
           },
           {
             in: 'path',
             name: 'metric',
             schema: {
-              type: 'string',
+              type: 'string'
             },
             required: true,
-            description: 'The name of the metric',
-          },
+            description: 'The name of the metric'
+          }
         ],
         responses: {
           200: {
@@ -430,32 +430,32 @@ export default {
                       time: {
                         type: 'string',
                         description: 'The data timestamp',
-                        example: '2021-04-28T12:04:00.000Z',
+                        example: '2021-04-28T12:04:00.000Z'
                       },
                       value: {
                         type: 'number',
                         format: 'float',
                         minimum: 0,
                         description: 'The value of the field',
-                        example: 80,
-                      },
-                    },
-                  },
-                },
-              },
-            },
+                        example: 80
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           401: {
-            $ref: '#/components/responses/401',
+            $ref: '#/components/responses/401'
           },
           403: {
-            $ref: '#/components/responses/403',
+            $ref: '#/components/responses/403'
           },
           500: {
-            $ref: '#/components/responses/500',
-          },
-        },
-      },
+            $ref: '#/components/responses/500'
+          }
+        }
+      }
     },
     // Authentication
     '/auth/users': {
@@ -464,8 +464,8 @@ export default {
         summary: 'Get a list of all known users',
         securtiy: [
           {
-            bearerAuth: [],
-          },
+            bearerAuth: []
+          }
         ],
         responses: {
           200: {
@@ -479,49 +479,49 @@ export default {
                     properties: {
                       uid: {
                         type: 'string',
-                        example: 'f4192305F41923053dcd4CDDBEba',
+                        example: 'f4192305F41923053dcd4CDDBEba'
                       },
                       email: {
                         type: 'string',
-                        example: 'example@example.com',
+                        example: 'example@example.com'
                       },
                       emailVerified: {
                         type: 'boolean',
-                        example: false,
+                        example: false
                       },
                       displayName: {
                         type: 'string',
-                        example: 'Example user',
+                        example: 'Example user'
                       },
                       photoURL: {
                         type: 'string',
-                        example: 'http://example.com/avatar.png',
+                        example: 'http://example.com/avatar.png'
                       },
                       disabled: {
                         type: 'boolean',
-                        example: false,
+                        example: false
                       },
                       metadata: {
                         type: 'object',
-                        example: {},
-                      },
-                    },
-                  },
-                },
-              },
-            },
+                        example: {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
           },
           401: {
-            $ref: '#/components/responses/401',
+            $ref: '#/components/responses/401'
           },
           403: {
-            $ref: '#/components/responses/403',
+            $ref: '#/components/responses/403'
           },
           500: {
-            $ref: '#/components/responses/500',
-          },
-        },
-      },
+            $ref: '#/components/responses/500'
+          }
+        }
+      }
     },
     '/auth/users/:uid': {
       delete: {
@@ -529,29 +529,29 @@ export default {
         summary: 'Delete a user by uid',
         securtiy: [
           {
-            bearerAuth: [],
-          },
+            bearerAuth: []
+          }
         ],
         parameters: [
           {
-            $ref: '#/components/parameters/uid',
-          },
+            $ref: '#/components/parameters/uid'
+          }
         ],
         responses: {
           200: {
-            $ref: '#/components/responses/200',
+            $ref: '#/components/responses/200'
           },
           401: {
-            $ref: '#/components/responses/401',
+            $ref: '#/components/responses/401'
           },
           403: {
-            $ref: '#/components/responses/403',
+            $ref: '#/components/responses/403'
           },
           500: {
-            $ref: '#/components/responses/500',
-          },
-        },
-      },
+            $ref: '#/components/responses/500'
+          }
+        }
+      }
     },
     '/auth/users/:uid/enable': {
       put: {
@@ -559,29 +559,29 @@ export default {
         summary: 'Enable a user by uid',
         securtiy: [
           {
-            bearerAuth: [],
-          },
+            bearerAuth: []
+          }
         ],
         parameters: [
           {
-            $ref: '#/components/parameters/uid',
-          },
+            $ref: '#/components/parameters/uid'
+          }
         ],
         responses: {
           200: {
-            $ref: '#/components/responses/200',
+            $ref: '#/components/responses/200'
           },
           401: {
-            $ref: '#/components/responses/401',
+            $ref: '#/components/responses/401'
           },
           403: {
-            $ref: '#/components/responses/403',
+            $ref: '#/components/responses/403'
           },
           500: {
-            $ref: '#/components/responses/500',
-          },
-        },
-      },
+            $ref: '#/components/responses/500'
+          }
+        }
+      }
     },
     '/auth/users/:uid/disable': {
       put: {
@@ -589,29 +589,29 @@ export default {
         summary: 'Disable a user by uid',
         securtiy: [
           {
-            bearerAuth: [],
-          },
+            bearerAuth: []
+          }
         ],
         parameters: [
           {
-            $ref: '#/components/parameters/uid',
-          },
+            $ref: '#/components/parameters/uid'
+          }
         ],
         responses: {
           200: {
-            $ref: '#/components/responses/200',
+            $ref: '#/components/responses/200'
           },
           401: {
-            $ref: '#/components/responses/401',
+            $ref: '#/components/responses/401'
           },
           403: {
-            $ref: '#/components/responses/403',
+            $ref: '#/components/responses/403'
           },
           500: {
-            $ref: '#/components/responses/500',
-          },
-        },
-      },
+            $ref: '#/components/responses/500'
+          }
+        }
+      }
     },
     '/auth/roles/grant/:role/:uid': {
       put: {
@@ -619,32 +619,32 @@ export default {
         summary: 'Give a user a new role',
         securtiy: [
           {
-            bearerAuth: [],
-          },
+            bearerAuth: []
+          }
         ],
         parameters: [
           {
-            $ref: '#/components/parameters/role',
+            $ref: '#/components/parameters/role'
           },
           {
-            $ref: '#/components/parameters/uid',
-          },
+            $ref: '#/components/parameters/uid'
+          }
         ],
         responses: {
           200: {
-            $ref: '#/components/responses/200',
+            $ref: '#/components/responses/200'
           },
           401: {
-            $ref: '#/components/responses/401',
+            $ref: '#/components/responses/401'
           },
           403: {
-            $ref: '#/components/responses/403',
+            $ref: '#/components/responses/403'
           },
           500: {
-            $ref: '#/components/responses/500',
-          },
-        },
-      },
+            $ref: '#/components/responses/500'
+          }
+        }
+      }
     },
     '/auth/roles/revoke/:role/:uid': {
       put: {
@@ -652,32 +652,32 @@ export default {
         summary: 'Remove a role from a user',
         securtiy: [
           {
-            bearerAuth: [],
-          },
+            bearerAuth: []
+          }
         ],
         parameters: [
           {
-            $ref: '#/components/parameters/role',
+            $ref: '#/components/parameters/role'
           },
           {
-            $ref: '#/components/parameters/uid',
-          },
+            $ref: '#/components/parameters/uid'
+          }
         ],
         responses: {
           200: {
-            $ref: '#/components/responses/200',
+            $ref: '#/components/responses/200'
           },
           401: {
-            $ref: '#/components/responses/401',
+            $ref: '#/components/responses/401'
           },
           403: {
-            $ref: '#/components/responses/403',
+            $ref: '#/components/responses/403'
           },
           500: {
-            $ref: '#/components/responses/500',
-          },
-        },
-      },
-    },
-  },
+            $ref: '#/components/responses/500'
+          }
+        }
+      }
+    }
+  }
 };

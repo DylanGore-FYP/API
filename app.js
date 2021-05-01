@@ -16,7 +16,7 @@ import firebase from './services/firebase';
 const options = {
   swaggerDefinition,
   // Paths to files containing OpenAPI definitions
-  apis: ['./routes/*.js'],
+  apis: ['./routes/*.js']
 };
 
 const swaggerSpec = swaggerJSDoc(options);
@@ -50,7 +50,7 @@ if (process.env.ADMIN_UID && process.env.ADMIN_UID.length > 0) {
     // Invalidate the user's current tokens as permissions may have changed
     firebase.auth().revokeRefreshTokens(process.env.ADMIN_UID).catch((err => console.error(err)))
     console.log(`Setting user ${process.env.ADMIN_UID} as admin`)
-  }).catch(_err => {
-    console.error(error)
+  }).catch(err => {
+    console.error(err)
   });
 }
