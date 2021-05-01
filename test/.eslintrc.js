@@ -1,6 +1,8 @@
-export const env = {
-  mocha: true
-};
-export const rules = {
-  'no-unused-vars': 'off'
+module.exports = {
+  env: {
+    mocha: true
+  },
+  rules: {
+    'no-unused-vars': 'off'
+  }
 };

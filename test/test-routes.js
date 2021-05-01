@@ -12,7 +12,6 @@ describe('Test Routes', () => {
     chai.request(app).get('/').then(res => {
       expect(res).should.have.status(200);
       expect(res).should.be.json;
-      done();
     }).catch(err => {throw err});
   });
 });
