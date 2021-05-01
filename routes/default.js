@@ -6,7 +6,7 @@ dotenv.config();
 var router = express.Router();
 
 /** GET: Root route - return the current package version */
-router.get('/', function (req, res, next) {
+router.get('/', function (_req, res, _next) {
   res.json({ version: process.env.npm_package_version });
 });
 

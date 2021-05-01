@@ -16,7 +16,7 @@ import firebase from './services/firebase';
 const options = {
   swaggerDefinition,
   // Paths to files containing OpenAPI definitions
-  apis: ['./routes/*.js'],
+  apis: ['./routes/*.js']
 };
 
 const swaggerSpec = swaggerJSDoc(options);
@@ -44,13 +44,15 @@ app.listen(port, function () {
 });
 
 //Set admin user if configured
-if (process.env.ADMIN_UID && process.env.ADMIN_UID.length > 0) {
+if (process.env.ADMIN_UID && process.env.ADMIN_UID.length > 0 && process.env.NODE_ENV != 'test') {
   // prettier-ignore
   firebase.auth().setCustomUserClaims(process.env.ADMIN_UID, {role: 'admin'}).then(_user => {
     // Invalidate the user's current tokens as permissions may have changed
     firebase.auth().revokeRefreshTokens(process.env.ADMIN_UID).catch((err => console.error(err)))
     console.log(`Setting user ${process.env.ADMIN_UID} as admin`)
-  }).catch(_err => {
-    console.error(error)
+  }).catch(err => {
+    console.error(err)
   });
 }
+
+export default app;
