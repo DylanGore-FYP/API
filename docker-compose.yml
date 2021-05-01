@@ -12,6 +12,14 @@ services:
       - 5000:5000
     security_opt:
       - no-new-privileges:true
+    environment:
+      INFLUX_HOST: 127.0.0.1
+      INFLUX_PORT: 8086
+      INFLUX_TOKEN: MyToken
+      INFLUX_ORG: MyOrg
+      INFLUX_BUCKET: MyBucket
+      ENABLE_METRICS: true
     volumes:
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+      - ./serviceAccountKey.json:/fyp-api/serviceAccountKey.json
