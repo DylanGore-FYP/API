@@ -17,7 +17,7 @@
 
 ## Configuration
 
-A Firebase service account file is required for this software to run. Please see the [documentation] for details. Other than that please create a `.env` file based on the example found in this repository. If you would like to run this app in Docker, please see the `docker-compose.yml` file for an example.
+A Firebase service account file is required for this software to run. Please see the [documentation](https://dylangore-fyp.github.io/Documentation/setup/external-firebase-authentication/) for details. Other than that please create a `.env` file based on the example found in this repository. If you would like to run this app in Docker, please see the `docker-compose.yml` file for an example.
 
 ## Running
 
