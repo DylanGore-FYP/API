@@ -2,8 +2,8 @@ export default {
   openapi: '3.0.3',
   info: {
     title: 'FYP API',
-    version: '0.0.0',
-    description: '',
+    version: '1.0.0',
+    description: 'This API provides an interface to allow authenticated users read vehicle data and for administrators to manage users.',
     contact: {
       name: 'Github',
       url: 'https://github.com/DylanGore/FYP-API'
